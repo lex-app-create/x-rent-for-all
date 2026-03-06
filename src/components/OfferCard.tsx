@@ -3,7 +3,24 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { buildWhatsAppUrl, buildOfferMessage } from "@/lib/whatsapp";
-import type { Offer } from "@/lib/types";
+
+interface OfferCardProps {
+  offer: {
+    id: string;
+    model_name: string;
+    fuel_type: string;
+    price_monthly: number;
+    duration_months: number;
+    km_annual: number;
+    deposit: number;
+    delivery: string;
+    services_included: string;
+    badge_type: string;
+    expires_at: string;
+    is_active: boolean;
+    created_at: string;
+  };
+}
 
 function getTimeLeft(expiresAt: string): string {
   const diff = new Date(expiresAt).getTime() - Date.now();
@@ -22,14 +39,13 @@ function isExpiringSoon(expiresAt: string): boolean {
   return diff > 0 && diff < 24 * 3600000;
 }
 
-const OfferCard = ({ offer }: { offer: Offer }) => {
+const OfferCard = ({ offer }: OfferCardProps) => {
   const expiring = isExpiringSoon(offer.expires_at);
   const timeLeft = getTimeLeft(offer.expires_at);
 
   return (
     <Card className="flex flex-col overflow-hidden border shadow-md transition-shadow hover:shadow-lg">
       <CardContent className="flex flex-1 flex-col gap-4 p-5">
-        {/* badges */}
         <div className="flex flex-wrap gap-2">
           <Badge variant="secondary" className="text-xs font-semibold uppercase">
             {offer.badge_type}
@@ -47,7 +63,6 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           </Badge>
         </div>
 
-        {/* title */}
         <div>
           <h3 className="text-lg font-bold text-foreground">{offer.model_name}</h3>
           <span className="flex items-center gap-1 text-sm text-muted-foreground">
@@ -56,13 +71,11 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           </span>
         </div>
 
-        {/* price */}
         <div className="rounded-lg bg-primary/5 p-3 text-center">
           <span className="text-3xl font-extrabold text-primary">€{offer.price_monthly}</span>
           <span className="text-sm text-muted-foreground">/mese + IVA</span>
         </div>
 
-        {/* specs */}
         <div className="grid grid-cols-2 gap-2 text-sm">
           <span className="flex items-center gap-1.5 text-muted-foreground">
             <Calendar className="h-3.5 w-3.5 text-secondary" />
@@ -82,7 +95,6 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           </span>
         </div>
 
-        {/* services */}
         <div className="flex items-start gap-1.5 rounded-md bg-muted p-3 text-xs text-muted-foreground">
           <ShieldCheck className="mt-0.5 h-3.5 w-3.5 shrink-0 text-primary" />
           <span>{offer.services_included}</span>
@@ -94,7 +106,6 @@ const OfferCard = ({ offer }: { offer: Offer }) => {
           </p>
         )}
 
-        {/* CTA */}
         <Button asChild className="mt-auto gap-2">
           <a
             href={buildWhatsAppUrl(buildOfferMessage(offer.model_name, offer.price_monthly))}

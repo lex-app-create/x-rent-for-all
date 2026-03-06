@@ -1,9 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import type { Offer } from "@/lib/types";
 
 export function useOffers() {
-  return useQuery<Offer[]>({
+  return useQuery({
     queryKey: ["offers"],
     queryFn: async () => {
       const { data, error } = await supabase
@@ -14,7 +13,7 @@ export function useOffers() {
         .order("created_at", { ascending: false })
         .limit(6);
       if (error) throw error;
-      return (data ?? []) as Offer[];
+      return data ?? [];
     },
     refetchInterval: 60000,
   });
