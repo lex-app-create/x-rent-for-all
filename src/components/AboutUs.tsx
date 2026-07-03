@@ -14,8 +14,8 @@ const AboutUs = () => (
       </p>
       <div className="grid gap-4 sm:grid-cols-2">
         {[
-          { icon: Mail, label: "info@noleggioxtutti.it" },
-          { icon: Phone, label: "+39 335 854 2051" },
+          { icon: Mail, label: "gzucchelli@luxurent.it" },
+          { icon: Phone, label: "+39 340 821 8788" },
           { icon: MapPin, label: "Operativi in tutta Italia" },
           { icon: Clock, label: "Lun–Ven 9:00–18:00" },
         ].map(({ icon: Icon, label }) => (
@@ -29,7 +29,7 @@ const AboutUs = () => (
         ))}
       </div>
       <p className="mt-6 text-center text-xs text-muted-foreground">
-        P.IVA: [da inserire] — Sede legale: [da inserire]
+        NoleggioXTutti.it è un marchio di luxurent.it — Luxurent Srl – P.I. 08763480962 – Sede: Via Emilia Km 312, Vizzolo Predabissi (MI)
       </p>
     </div>
   </section>
