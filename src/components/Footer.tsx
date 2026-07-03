@@ -20,6 +20,11 @@ const Footer = () => (
         Le offerte pubblicate sono soggette a disponibilità e possono variare
         senza preavviso. I prezzi sono da intendersi + IVA.
       </p>
+      <nav className="mt-3 flex justify-center gap-3 text-xs">
+        <a href="/privacy-policy" className="underline hover:text-foreground">Privacy Policy</a>
+        <span>•</span>
+        <a href="/cookie-policy" className="underline hover:text-foreground">Cookie Policy</a>
+      </nav>
     </div>
   </footer>
 );
